@@ -1,0 +1,17 @@
+{
+    "name": "azimsaibou/sous-controle",
+    "autoload": {
+        "psr-4": {
+            "SousControle\\App\\": "app/",
+            "SousControle\\Core\\": "core/",
+            "SousControle\\Database": "database"
+        }
+    },
+    "authors": [
+        {
+            "name": "richazim",
+            "email": "saibouazim90@gmail.com"
+        }
+    ],
+    "require": {}
+}
