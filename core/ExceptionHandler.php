@@ -23,7 +23,7 @@ class ExceptionHandler
             $production_exception_template = '500.php';
         }
 
-        if(strtolower($_ENV['APP_ENV']) !== 'production'){ 
+        if(strtolower(config('app.env') !== 'production')){ 
             printException($exception);
         }else{
             printSimpleTemplate(__DIR__ . "/../views/errors/$production_exception_template");

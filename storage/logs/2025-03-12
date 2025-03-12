@@ -1,0 +1,30 @@
+[2025-03-12 17:54:48] Exception: Division by zero 
+in /Applications/MAMP/htdocs/sous-controle/public/index.php 
+on line 16
+Trace: #0 {main}
+
+[2025-03-12 17:55:49] Exception: Division by zero 
+in /Applications/MAMP/htdocs/sous-controle/public/index.php 
+on line 16
+Trace: #0 {main}
+
+[2025-03-12 18:06:31] Exception: Division by zero 
+in /Applications/MAMP/htdocs/sous-controle/public/index.php 
+on line 16
+Trace: #0 {main}
+
+[2025-03-12 18:06:34] Exception: Division by zero 
+in /Applications/MAMP/htdocs/sous-controle/public/index.php 
+on line 16
+Trace: #0 {main}
+
+[2025-03-12 18:06:36] Exception: Division by zero 
+in /Applications/MAMP/htdocs/sous-controle/public/index.php 
+on line 16
+Trace: #0 {main}
+
+[2025-03-12 18:06:37] Exception: Division by zero 
+in /Applications/MAMP/htdocs/sous-controle/public/index.php 
+on line 16
+Trace: #0 {main}
+

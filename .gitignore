@@ -3,4 +3,5 @@ vendor
 .env
 
 # Ignore macOS system files
-.DS_Stores
+.DS_Store
+**/.DS_Store

@@ -8,7 +8,8 @@
         },
         "files": [
         "core/helpers/arrays.php",
-        "core/helpers/exceptions.php"
+        "core/helpers/exceptions.php", 
+        "core/helpers/functions.php"
         ]
     },
     "authors": [
