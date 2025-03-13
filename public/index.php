@@ -2,6 +2,7 @@
 
 use SousControle\Core\DotenvLoader;
 use SousControle\Core\Request;
+use SousControle\Core\Response;
 
 require __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/../core/helpers/arrays.php";
@@ -16,7 +17,7 @@ set_exception_handler("SousControle\Core\ExceptionHandler::handleException");
 
 // echo(1/0);
 
-// REQUEST
+// REQUEST INITIALIZATION
 $request = new Request(
     $_SERVER['REQUEST_URI'],
     $_SERVER['REQUEST_METHOD'],
@@ -25,6 +26,6 @@ $request = new Request(
     $_GET
 );
 
-dump($request);
-$request->__set('url', "/test");
-dump($request);
+// RESPONSE INITIALIZATION
+$response = new Response();
+
