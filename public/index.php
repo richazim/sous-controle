@@ -32,7 +32,7 @@ $response = new Response();
 
 
 // ROUTES INITIALIZATION
-$routes = require __DIR__ . "/../config/routes.php";
+$routes = require __DIR__ . "/../config/routes.php"; 
 
 $params = $routes->match($request);
 

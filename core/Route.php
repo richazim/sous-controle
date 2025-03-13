@@ -2,6 +2,8 @@
 
 namespace SousControle\Core;
 
+use Exception;
+use SousControle\Core\Exceptions\RouteNotFoundException;
 use SousControle\Core\Request;
 
 class Route
@@ -47,7 +49,7 @@ class Route
             }
         }
 
-        return [];
+        throw new RouteNotFoundException("Route not found for the request url: " . $request->__get('url'));
     }
 
     private function transformRouteUrlToPattern(string $route_url): string
