@@ -3,6 +3,7 @@
 use SousControle\Core\DotenvLoader;
 use SousControle\Core\Request;
 use SousControle\Core\Response;
+use SousControle\Core\Route;
 
 require __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/../core/helpers/arrays.php";
@@ -29,3 +30,10 @@ $request = new Request(
 // RESPONSE INITIALIZATION
 $response = new Response();
 
+
+// ROUTES INITIALIZATION
+$routes = require __DIR__ . "/../config/routes.php";
+
+$params = $routes->match($request);
+
+dump($params);

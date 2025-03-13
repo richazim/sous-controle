@@ -1,6 +1,6 @@
 <?php
 
-use Core\Route;
+use SousControle\Core\Route;
 
 $route = new Route();
 
@@ -13,3 +13,6 @@ $route->add([
 ], [
     'middleware' => 'auth'
 ]);
+
+
+return $route;
