@@ -1,0 +1,10 @@
+[2025-03-13 08:09:17] Exception: Class "Core\Request" not found 
+in /var/www/html/sous_controle/public/index.php 
+on line 20
+Trace: #0 {main}
+
+[2025-03-13 08:09:20] Exception: Class "Core\Request" not found 
+in /var/www/html/sous_controle/public/index.php 
+on line 20
+Trace: #0 {main}
+

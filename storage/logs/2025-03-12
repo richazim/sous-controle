@@ -28,3 +28,8 @@ in /Applications/MAMP/htdocs/sous-controle/public/index.php
 on line 16
 Trace: #0 {main}
 
+[2025-03-12 21:10:47] Exception: Division by zero 
+in /var/www/html/sous_controle/public/index.php 
+on line 16
+Trace: #0 {main}
+
