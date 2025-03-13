@@ -24,5 +24,6 @@ class Request
         if (property_exists($this, $property)) {
           $this->$property = $value;
         } 
+        throw new InvalidCallException("Property $property does not exist on class " . static::class);
     }
 }

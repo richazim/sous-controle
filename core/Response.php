@@ -4,7 +4,11 @@ namespace SousControle\Core;
 
 class Response
 {
-    public function __construct(private string $html = '', private int $status = 200, private array $headers = [])
+    private string $html = '';
+    private int $status = 200;
+    private array $headers = [];
+
+    public function __construct()
     {
 
     }

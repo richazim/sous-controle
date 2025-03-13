@@ -4,6 +4,7 @@ use SousControle\Core\DotenvLoader;
 use SousControle\Core\Request;
 use SousControle\Core\Response;
 use SousControle\Core\Route;
+use SousControle\Core\Test;
 
 require __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/../core/helpers/arrays.php";
@@ -36,4 +37,9 @@ $routes = require __DIR__ . "/../config/routes.php";
 
 $params = $routes->match($request);
 
-dump($params);
+// dump($params);
+
+// SOUS-CONTROLE CONTAINER INITIALIZATION
+$container = require __DIR__ . "/../config/services.php";
+
+dump($container->getInstance(Test::class));

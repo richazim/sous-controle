@@ -1,6 +1,6 @@
 <?php
 
-use SousControle\Core\Exceptions\Container;
+use SousControle\Core\Container;
 use SousControle\Core\Response;
 
 $container = new Container();
