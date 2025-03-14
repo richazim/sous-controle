@@ -3,8 +3,8 @@
 use SousControle\Core\DotenvLoader;
 use SousControle\Core\Request;
 use SousControle\Core\Response;
-use SousControle\Core\Route;
-use SousControle\Core\Test;
+use SousControle\Core\Templating\Templating;
+use SousControle\Core\Templating\TemplatingEngine;
 
 require __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/../core/helpers/arrays.php";
@@ -35,11 +35,12 @@ $response = new Response();
 // ROUTES INITIALIZATION
 $routes = require __DIR__ . "/../config/routes.php"; 
 
-$params = $routes->match($request);
-
-// dump($params);
+// $params = $routes->match($request); 
 
 // SOUS-CONTROLE CONTAINER INITIALIZATION
-$container = require __DIR__ . "/../config/services.php";
+$container = require __DIR__ . "/../config/services.php"; 
 
-dump($container->getInstance(Test::class));
+// TEMPLATING ENGINE TESTING
+$templatingEngine = $container->getInstance(TemplatingEngine::class);
+
+dump($templatingEngine->process('home/index', ['name' => 'Azim']));
