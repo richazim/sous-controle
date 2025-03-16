@@ -2,7 +2,7 @@
     "name": "azimsaibou/sous-controle",
     "autoload": {
         "psr-4": {
-            "SousControle\\App\\": "app/",
+            "App\\": "app/",
             "SousControle\\Core\\": "core/",
             "SousControle\\Database\\": "database/"
         },

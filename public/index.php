@@ -2,8 +2,7 @@
 
 use SousControle\Core\DotenvLoader;
 use SousControle\Core\Request;
-use SousControle\Core\Response;
-use SousControle\Core\Templating\Templating;
+use SousControle\Core\Response; 
 use SousControle\Core\Templating\TemplatingEngine;
 
 require __DIR__ . "/../vendor/autoload.php";
@@ -41,6 +40,8 @@ $routes = require __DIR__ . "/../config/routes.php";
 $container = require __DIR__ . "/../config/services.php"; 
 
 // TEMPLATING ENGINE TESTING
-$templatingEngine = $container->getInstance(TemplatingEngine::class);
+// $templatingEngine = $container->getInstance(TemplatingEngine::class); 
+// dump($templatingEngine->process('home/index', ['name' => 'Azim']));
 
-dump($templatingEngine->process('home/index', ['name' => 'Azim']));
+// IMPLEMENTING MIDDLEWARE PIPELINES
+$pipeline = $container-
