@@ -8,10 +8,11 @@ $route->add([
     'url' => '/',
     'method' => 'GET'
 ], [
-    'controller' => 'home',
+    'controller' => '\App\Controllers\HomeController',
     'action' => 'index'
 ], [
-    'middleware' => 'auth'
+    '\App\Middlewares\checkAuthenticated',
+    '\App\Middlewares\checkAdmin'
 ]);
 
 // $route->add([
@@ -36,7 +37,7 @@ $route->add([
 [
 
 ], [
-    'middleware' => 'auth'
+    'auth'
 ]);
 
 

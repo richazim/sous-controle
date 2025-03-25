@@ -31,7 +31,7 @@ class Route
         $this->routes[] = [
             "urlArray" => $urlArray,
             "paramsArray" => $paramsArray,
-            "middlewares" => $middlewares
+            "middlewares" => ["middlewares" => $middlewares]
         ];
     }
 

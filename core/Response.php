@@ -8,9 +8,11 @@ class Response
     private int $status = 200;
     private array $headers = [];
 
-    public function __construct()
+    public function __construct(string $html = '', int $status = 200, array $headers = [])
     {
-
+        $this->html = $html;
+        $this->status = $status;
+        $this->headers = $headers;
     }
 
     public function __get(string $property): mixed

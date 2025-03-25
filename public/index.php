@@ -1,6 +1,7 @@
 <?php 
 
 use SousControle\Core\DotenvLoader;
+use SousControle\Core\Middlewares\Pipeline;
 use SousControle\Core\Request;
 use SousControle\Core\Response; 
 use SousControle\Core\Templating\TemplatingEngine;
@@ -33,6 +34,7 @@ $response = new Response();
 
 // ROUTES INITIALIZATION
 $routes = require __DIR__ . "/../config/routes.php"; 
+$params = $route->match($request);
 
 // $params = $routes->match($request); 
 
@@ -44,4 +46,5 @@ $container = require __DIR__ . "/../config/services.php";
 // dump($templatingEngine->process('home/index', ['name' => 'Azim']));
 
 // IMPLEMENTING MIDDLEWARE PIPELINES
-$pipeline = $container-
+$pipeline = new Pipeline($request,  $params, $container);
+dump($pipeline->getResponse());
