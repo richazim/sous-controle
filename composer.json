@@ -9,7 +9,8 @@
         "files": [
         "core/helpers/arrays.php",
         "core/helpers/exceptions.php", 
-        "core/helpers/functions.php"
+        "core/helpers/functions.php",
+        "core/helpers/files.php"
         ]
     },
     "authors": [
