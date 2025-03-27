@@ -4,9 +4,9 @@ namespace SousControle\Core;
 
 class DotenvLoader
 {
-    public function load(): void
+    public function load(string $fileName): void
     {
-        $array = file('./../.env'); // get .env lines as an array
+        $array = file($fileName); // get .env lines as an array
         $array = $this->removeNonValidArrayCases($array); 
         foreach($array as $line){
             $line = $this->removeComment($line);

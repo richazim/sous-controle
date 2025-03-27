@@ -11,7 +11,7 @@ require_once __DIR__ . "/../core/helpers/arrays.php";
 
 // ENV LOADER
 $dotenv = new DotenvLoader();
-$dotenv->load(); 
+$dotenv->load(base_path('.env')); 
 
 // ERROR HANDLING
 set_error_handler("SousControle\Core\ExceptionHandler::transformErrorToException");
