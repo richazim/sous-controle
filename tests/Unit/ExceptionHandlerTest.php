@@ -2,13 +2,7 @@
 
 use SousControle\Core\ExceptionHandler;
 use SousControle\Core\Exceptions\PageNotFoundException;
-use SousControle\Core\HttpResponseCodeWrapper;
-
-// Mock function for testing response code
-function mock_http_response_code($code) {
-    global $http_response_code;
-    $http_response_code = $code;
-}
+use SousControle\Core\HttpResponseCodeWrapper; 
 
 it('print the correct message in development mode when a page not found exception is thrown', function(){
     $_ENV['APP_ENV'] = 'devlopmentt';
