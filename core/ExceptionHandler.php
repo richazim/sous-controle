@@ -7,26 +7,27 @@ use SousControle\Core\Exceptions\PageNotFoundException;
 use Throwable;
 
 class ExceptionHandler
-{
-    public static function transformErrorToException(int $errno, string $errmsg, string $errfile, int $errline): void
+{ 
+    public function __construct(private HttpResponseCodeWrapper $httpResponseCodeWrapper)
     {
-        throw new ErrorException($errmsg, $errno, E_ERROR, $errfile, $errline);
-    } 
 
-    public static function handleException(Throwable $exception): void
+    }
+
+    public function handleException(Throwable $exception): void
     { 
+
         if($exception instanceof PageNotFoundException){
-            http_response_code(404); 
+            $this->httpResponseCodeWrapper->setCode(404);
             $production_exception_template = '404.php';
         }else{
-            http_response_code(500); 
+            $this->httpResponseCodeWrapper->setCode(500);
             $production_exception_template = '500.php';
         }
 
         if(strtolower(config('app.env') !== 'production')){ 
-            printException($exception);
+            echo var_export(convertToArray($exception), true);
         }else{
-            printSimpleTemplate(__DIR__ . "/../views/errors/$production_exception_template");
+            require __DIR__ . "/../views/errors/$production_exception_template";
             logException($exception);
         }
     }

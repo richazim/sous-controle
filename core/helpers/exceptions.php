@@ -1,17 +1,14 @@
 <?php
 
-function printException(Throwable $exception): void
+function convertToArray(Throwable $exception): array
 {
-    echo("Exception Rised: ");
-    dump($exception);
-    echo("Stack Trace: ");
-    dump($exception->getTraceAsString());
-}
-
-function printSimpleTemplate(string $templatePath): void
-{
-    require $templatePath;
-}
+    return [ 
+        "Exception" => $exception->getMessage(),
+        "File" => $exception->getFile(),
+        "Line" => $exception->getLine(),
+        "Trace" => $exception->getTraceAsString()
+    ];
+} 
 
 function logException(Throwable $e): void
 {

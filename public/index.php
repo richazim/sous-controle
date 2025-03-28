@@ -1,6 +1,8 @@
 <?php 
 
 use SousControle\Core\DotenvLoader;
+use SousControle\Core\ExceptionHandler;
+use SousControle\Core\HttpResponseCodeWrapper;
 use SousControle\Core\Middlewares\Pipeline;
 use SousControle\Core\Request;
 use SousControle\Core\Response; 
@@ -14,8 +16,10 @@ $dotenv = new DotenvLoader();
 $dotenv->load(base_path('.env')); 
 
 // ERROR HANDLING
-set_error_handler("SousControle\Core\ExceptionHandler::transformErrorToException");
-set_exception_handler("SousControle\Core\ExceptionHandler::handleException"); 
+$httpResponseCodeWrapper = new HttpResponseCodeWrapper();
+$exceptionHandler = new ExceptionHandler($httpResponseCodeWrapper);
+set_error_handler("SousControle\Core\ErrorHandler::transformErrorToException");
+set_exception_handler(callback: [$exceptionHandler, 'handleException']); 
 
 // echo(1/0);
 
@@ -48,3 +52,5 @@ $container = require __DIR__ . "/../config/services.php";
 // IMPLEMENTING MIDDLEWARE PIPELINES
 $pipeline = new Pipeline($request,  $params, $container);
 dump($pipeline->getResponse());
+
+dump(["daljkf" => "Hellow world!"]);
