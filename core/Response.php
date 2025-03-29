@@ -4,9 +4,9 @@ namespace SousControle\Core;
 
 class Response
 {
-    private string $html = '';
-    private int $status = 200;
-    private array $headers = [];
+    private string $html;
+    private int $status;
+    private array $headers;
 
     public function __construct(string $html = '', int $status = 200, array $headers = [])
     {
@@ -15,13 +15,20 @@ class Response
         $this->headers = $headers;
     }
 
-    public function __get(string $property): mixed
+    public function getHtml(): string
     {
-        if (property_exists($this, $property)) {
-          return $this->$property;
-        }
-        return null;
+        return $this->html;
     }
+
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    } 
 
     public function setHtml(string $html): void
     {
@@ -33,22 +40,29 @@ class Response
         $this->status = $status;
     }
 
-    public function setHeader(string $header): void
+    public function setHeader(string $name, string $value): void
     {
-        $this->headers[] = $header;
+        $this->headers[$name] = $value;
+    }
+
+    public function json(array $data, int $status = 200): void
+    {
+        $this->setHeader('Content-Type', 'application/json');
+        $this->setStatus($status);
+        $this->setHtml(json_encode($data));
     }
 
     public function respond(): void
     {
-        if ($this->__get('status')) {
+        if ($this->getStatus()) {
         
             http_response_code($this->status);
         }
 
-        foreach ($this->__get('headers') as $header) {
-            header($header);
+        foreach ($this->getHeaders() as $name => $value) {
+            header("$name: $value");
         }
 
-        echo $this->__get('html');
+        echo $this->getHtml();
     }
 }
