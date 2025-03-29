@@ -6,24 +6,44 @@ use SousControle\Core\Exceptions\InvalidCallException;
 
 class Request
 {
-    public function __construct(private string $url, private string $method, private array $files, private array $post, private array $get)
-    {
+  public function __construct(private string $url = '', private string $method = '', private array $files = [], private array $post = [], private array $get = [])
+  {
 
-    }
+  }
 
-    public function __get(string $property): mixed
-    {
-        if (property_exists($this, $property)) {
-          return $this->$property;
-        }
-        throw new InvalidCallException("Property $property does not exist on class " . static::class);
-    }
+  public function getUrl(): string
+  {
+    return $this->url;
+  }
 
-    public function __set(string $property, string|array $value) : void
-    {
-        if (property_exists($this, $property)) {
-          $this->$property = $value;
-        } 
-        throw new InvalidCallException("Property $property does not exist on class " . static::class);
-    }
+  public function getMethod(): string
+  { 
+    return $this->method;
+  }
+
+  public function getFiles(): array
+  {
+    return $this->files;
+  }
+
+  public function getPost(): array
+  {
+    return $this->post;
+  }
+
+  public function getGet(): array
+  {
+    return $this->get;
+  }
+
+  public static function createFromGlobals(): self // to easily create a request from $_SERVER, $_GET, $_POST, $_FILES
+  {
+    return new self(
+      url: $_SERVER['REQUEST_URI'],
+      method: $_SERVER['REQUEST_METHOD'],
+      files: $_FILES,
+      post: $_POST,
+      get: $_GET
+    );
+  }
 }

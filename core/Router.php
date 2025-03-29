@@ -6,7 +6,7 @@ use Exception;
 use SousControle\Core\Exceptions\RouteNotFoundException;
 use SousControle\Core\Request;
 
-class Route
+class Router
 {
     private array $routes = [];
 
@@ -39,17 +39,17 @@ class Route
     { 
         foreach ($this->routes as $route) { // For each stored route 
             $urlPattern = $this->transformRouteUrlToPattern($route["urlArray"]["url"]); 
-            if (preg_match($urlPattern, trim($request->__get('url'), "/"), $matches)) { 
+            if (preg_match($urlPattern, trim($request->getUrl(), "/"), $matches)) { 
                 $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY); // Keep only array case with string key (to ensure it is the captured one when processing matches) 
                 $params = array_merge($matches, $route["paramsArray"], $route["middlewares"], ['method' => $route["urlArray"]['method']]);  
-                if (strtolower($params['method']) !== strtolower($request->__get('method'))) { 
+                if (strtolower($params['method']) !== strtolower($request->getMethod())) { 
                     continue; 
                 } 
                 return $params;
             }
         }
 
-        throw new RouteNotFoundException("Route not found for the request url: " . $request->__get('url'));
+        throw new RouteNotFoundException("Route not found for the request url: " . $request->getUrl());
     }
 
     private function transformRouteUrlToPattern(string $route_url): string

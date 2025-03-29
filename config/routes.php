@@ -1,8 +1,8 @@
 <?php
 
-use SousControle\Core\Route;
+use SousControle\Core\Router;
 
-$route = new Route();
+$route = new Router();
 
 $route->add([
     'url' => '/',
