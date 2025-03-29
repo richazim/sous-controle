@@ -31,7 +31,7 @@ class Container
             return new $className();
         }
 
-        if($this->isConstructorContainArgumentWithOnlyOneType($className)){
+        if($this->constructorContainArgumentWithManyTypesOrArgumentWithoutType($className)){
             throw new ContainerException("The constructor argument of the class $className must have a single type declaration, to be able to use Dependency Injection");
         }
 
@@ -71,7 +71,7 @@ class Container
         return false;
     }
 
-    private function isConstructorContainArgumentWithOnlyOneType(string $className): bool
+    private function constructorContainArgumentWithManyTypesOrArgumentWithoutType(string $className): bool
     {
         $reflection = new ReflectionClass($className);
         $constructor = $reflection->getConstructor();

@@ -4,7 +4,8 @@
         "psr-4": {
             "App\\": "app/",
             "SousControle\\Core\\": "core/",
-            "SousControle\\Database\\": "database/"
+            "SousControle\\Database\\": "database/",
+            "SousControle\\Tests\\": "tests/"
         },
         "files": [
         "core/helpers/arrays.php",
