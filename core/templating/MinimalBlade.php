@@ -7,11 +7,11 @@ use SousControle\Core\Templating\TemplatingEngine;
 
 class MinimalBlade implements TemplatingEngine
 { 
-    public const VIEWS_DIR = __DIR__ . "/../../views/";
+    public string $VIEWS_DIR = __DIR__ . "/../../views/";
 
     public function process(string $template, array $data = []): string
-    { 
-        $views_dir = self::VIEWS_DIR;
+    {
+        $views_dir = $this->VIEWS_DIR;
         if(file_exists($views_dir . $template . ".blade.php")) {
             $templateContent = file_get_contents($views_dir . $template . ".blade.php"); 
             if($this->isTemplateContentContainExtends($templateContent)){
@@ -35,7 +35,7 @@ class MinimalBlade implements TemplatingEngine
         $boolean = preg_match('/@extends\s*\(\s*[\'"](.*?)[\'"]\s*\)/', $content, $matches);
         if($boolean){
             $extendsFile = $matches[1] . ".blade.php";
-            if(file_exists(self::VIEWS_DIR . $extendsFile)){
+            if(file_exists($this->VIEWS_DIR . $extendsFile)){
                 return $extendsFile;
             }else{
                 throw new FileUnfoundException("Your extended file $extendsFile not found in Views Directory");
@@ -64,7 +64,7 @@ class MinimalBlade implements TemplatingEngine
     private function replaceIncludesToContents(string $templateContent): string 
     {
         return preg_replace_callback('/@include\s*\(\s*[\'"](.+?)[\'"]\s*\)/', function ($matches) {
-            $filePath = self::VIEWS_DIR . str_replace('.', '/', $matches[1]) . '.blade.php';
+            $filePath = $this->VIEWS_DIR . str_replace('.', '/', $matches[1]) . '.blade.php';
             if (!file_exists($filePath)) {
                 throw new FileUnfoundException("Included File $filePath in template not found");
             }
@@ -76,7 +76,7 @@ class MinimalBlade implements TemplatingEngine
     private function replaceVariables(string $templateContent, array $data): string
     {
         return preg_replace_callback('/{{\s*\$(\w+)\s*}}/', function ($matches) use ($data) {
-            return htmlspecialchars($data[$matches[1]]) ?? ''; // Remplace par la valeur ou une chaîne vide si non trouvée
+            return htmlspecialchars($data[$matches[1]]) ?? ''; // Remplace par la valeur safe ou une chaîne vide si non trouvée
         }, $templateContent);
     }
 
@@ -86,8 +86,8 @@ class MinimalBlade implements TemplatingEngine
     }
     
     private function executePhpCode(string $templateContent, array $data = []): string
-    { 
-          // Extraire les variables pour les rendre accessibles dans le template
+    {
+        // Extraire les variables pour les rendre accessibles dans le template;
         extract($data); 
 
         // Exécuter le code PHP
