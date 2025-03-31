@@ -22,11 +22,11 @@ class Pipeline
     public function getResponse(): Response
     { 
         if(!empty($this->executableMiddlewares)){
-            $middleware = array_shift($this->executableMiddlewares);
+            $middleware = array_shift($this->executableMiddlewares); 
             $response = $this->container->getInstance($middleware) -> handle($this->request, Closure::fromCallable([$this, 'next']));
             return $response;
         } 
-
+        
         return $this->container->getInstance($this->params['controller']) -> {$this->params['action']}(); 
     }
 
