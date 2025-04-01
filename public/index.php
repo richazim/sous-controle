@@ -1,12 +1,13 @@
 <?php 
 
+use Core\Kernel;
 use SousControle\Core\DotenvLoader;
 use SousControle\Core\ExceptionHandler;
 use SousControle\Core\HttpResponseCodeWrapper;
+use SousControle\Core\Kernel as CoreKernel;
 use SousControle\Core\Middlewares\Pipeline;
 use SousControle\Core\Request;
 use SousControle\Core\Response; 
-use SousControle\Core\Templating\TemplatingEngine;
 
 require __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/../core/helpers/arrays.php";
@@ -18,7 +19,7 @@ $dotenv->load(base_path('.env'));
 // ERROR HANDLING
 $httpResponseCodeWrapper = new HttpResponseCodeWrapper();
 $exceptionHandler = new ExceptionHandler($httpResponseCodeWrapper);
-set_error_handler("SousControle\Core\ErrorHandler::transformErrorToException");
+set_error_handler(callback: "SousControle\Core\ErrorHandler::transformErrorToException");
 set_exception_handler(callback: [$exceptionHandler, 'handleException']); 
 
 // echo(1/0);
@@ -30,27 +31,20 @@ $request = new Request(
     $_FILES,
     $_POST,
     $_GET
-);
-
-// RESPONSE INITIALIZATION
-$response = new Response();
+); 
 
 
 // ROUTES INITIALIZATION
-$routes = require __DIR__ . "/../config/routes.php"; 
-$params = $route->match($request);
+$router = require __DIR__ . "/../config/routes.php"; 
 
-// $params = $routes->match($request); 
 
 // SOUS-CONTROLE CONTAINER INITIALIZATION
 $container = require __DIR__ . "/../config/services.php"; 
 
-// TEMPLATING ENGINE TESTING
-// $templatingEngine = $container->getInstance(TemplatingEngine::class); 
-// dump($templatingEngine->process('home/index', ['name' => 'Azim']));
+// IMPLEMENTING MIDDLEWARE PIPELINES 
 
-// IMPLEMENTING MIDDLEWARE PIPELINES
-$pipeline = new Pipeline($request,  $params, $container);
-dump($pipeline->getResponse());
+$kernel = new CoreKernel($request, $router, $container);
 
-dump(["daljkf" => "Hellow world!"]);
+$response = $kernel->getResponse(); 
+
+$response->respond();

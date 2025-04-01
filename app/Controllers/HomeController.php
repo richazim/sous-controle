@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
-use SousControle\Core\Response;
+use SousControle\Core\Controller;
+use SousControle\Core\Response; 
 
-class HomeController
+class HomeController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
-        return new Response("Je suis de l'action index du Controleur Home");
+        return $this->view("home/index");
     }
 }

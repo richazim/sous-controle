@@ -3,6 +3,7 @@
 use SousControle\Core\Container;
 use SousControle\Core\Middlewares\Pipeline;
 use SousControle\Core\Request;
+use SousControle\Core\RequestToControllerHandler;
 use SousControle\Core\Response;
 use SousControle\Tests\Fixtures\Middlewares\SimpleMiddleware;
 use SousControle\Tests\Fixtures\Pipeline\Controller;
@@ -53,15 +54,21 @@ it('executes a middleware before the controller', function () {
 it('executes the controller when no middleware', function(){
     $request = Mockery::mock(Request::class);
 
-    $response = Mockery::mock(Response::class); 
+    $response = Mockery::mock(Response::class);
+    
+    $handler = Mockery::mock(RequestToControllerHandler::class);
+    $handler
+        ->shouldReceive('handle')
+        ->times(3)
+        ->andReturn(new Response('OK', 200));
 
     $container = Mockery::mock(Container::class); 
 
     $container
         ->shouldReceive('getInstance')
-        ->with(Controller::class)
+        ->with(RequestToControllerHandler::class) 
         ->times(3)
-        ->andReturn(new Controller());
+        ->andReturn($handler);
 
     $pipeline = new Pipeline( 
         $request, 

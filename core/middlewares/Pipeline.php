@@ -5,7 +5,8 @@ namespace SousControle\Core\Middlewares;
 use Closure;
 use SousControle\Core\Container;
 use SousControle\Core\Request;
-use SousControle\Core\Response;
+use SousControle\Core\RequestToControllerHandler;
+use SousControle\Core\Response; 
 
 class Pipeline
 {
@@ -27,7 +28,7 @@ class Pipeline
             return $response;
         } 
         
-        return $this->container->getInstance($this->params['controller']) -> {$this->params['action']}(); 
+        return $this->container->getInstance(RequestToControllerHandler::class) -> handle($this->request, $this->params, $this->container); 
     }
 
     public function next(Request $request): Response

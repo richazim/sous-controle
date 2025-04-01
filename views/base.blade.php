@@ -7,9 +7,7 @@
         @yield('title')
     </title>
 </head>
-<body>
-        @include('partials.header')
-        @yield('content')
-        @include('partials.footer')
+<body> 
+        @yield('content') 
 </body>
 </html>
