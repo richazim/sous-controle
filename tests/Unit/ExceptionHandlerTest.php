@@ -1,6 +1,6 @@
 <?php
 
-use Core\DataPrinterWrapper;
+use SousControle\Core\DataPrinterWrapper;
 use SousControle\Core\ExceptionHandler;
 use SousControle\Core\Exceptions\PageNotFoundException;
 use SousControle\Core\HttpResponseCodeWrapper; 

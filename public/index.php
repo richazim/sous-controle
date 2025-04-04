@@ -1,6 +1,6 @@
 <?php 
 
-use Core\DataPrinterWrapper;
+use SousControle\Core\DataPrinterWrapper;
 use SousControle\Core\DotenvLoader;
 use SousControle\Core\ExceptionHandler;
 use SousControle\Core\HttpResponseCodeWrapper;

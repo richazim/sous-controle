@@ -2,7 +2,7 @@
 
 namespace SousControle\Core;
 
-use Core\DataPrinterWrapper;
+use SousControle\Core\DataPrinterWrapper;
 use ErrorException;
 use SousControle\Core\Exceptions\PageNotFoundException;
 use Throwable;
