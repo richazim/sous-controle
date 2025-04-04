@@ -7,6 +7,7 @@ use SousControle\Core\Response;
 use SousControle\Core\Templating\MinimalBlade;
 use SousControle\Tests\Fixtures\RequestToControllerHandler\FakeControllerToCall;
 use SousControle\Tests\Fixtures\RequestToControllerHandler\FakeControllerToGetItsActionArgument;
+use SousControle\Tests\Fixtures\RequestToControllerHandler\FakeControllerWithArgumentToCall;
 
 it('calls the appropriate controller action and returns the returned response', function(){
     $controller = new FakeControllerToCall();
@@ -38,7 +39,7 @@ it('calls the appropriate controller action and returns the returned response', 
 
 
 it('can extract the controller action args from the params sent by the router', function(){
-    $controller = new FakeControllerToGetItsActionArgument();
+    $controller = new FakeControllerWithArgumentToCall();
 
     $requestToControllerHandler = new RequestToControllerHandler();
 
@@ -49,7 +50,7 @@ it('can extract the controller action args from the params sent by the router', 
     // call it
     $data = $method->invoke($requestToControllerHandler, $controller, 'index', [
         'action' => 'index',
-        'controller' => FakeControllerToGetItsActionArgument::class,
+        'controller' => FakeControllerWithArgumentToCall::class,
         'id' => '3',
         'name' => 'jon'
     ]);
