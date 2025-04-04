@@ -1,5 +1,6 @@
 <?php 
 
+use Core\DataPrinterWrapper;
 use SousControle\Core\DotenvLoader;
 use SousControle\Core\ExceptionHandler;
 use SousControle\Core\HttpResponseCodeWrapper;
@@ -14,9 +15,12 @@ $dotenv = new DotenvLoader();
 $dotenv->load(base_path('.env')); 
 
 // ERROR HANDLING
-$httpResponseCodeWrapper = new HttpResponseCodeWrapper();
-$exceptionHandler = new ExceptionHandler($httpResponseCodeWrapper);
 set_error_handler(callback: "SousControle\Core\ErrorHandler::transformErrorToException");
+
+$httpResponseCodeCaller = new HttpResponseCodeWrapper();
+$dataPrinter = new DataPrinterWrapper();
+$exceptionHandler = new ExceptionHandler($httpResponseCodeCaller, $dataPrinter);
+
 set_exception_handler(callback: [$exceptionHandler, 'handleException']); 
 
 // REQUEST INITIALIZATION

@@ -2,18 +2,19 @@
 
 namespace SousControle\Core;
 
+use Core\DataPrinterWrapper;
 use ErrorException;
 use SousControle\Core\Exceptions\PageNotFoundException;
 use Throwable;
 
 class ExceptionHandler
 { 
-    public function __construct(private HttpResponseCodeWrapper $httpResponseCodeWrapper)
+    public function __construct(private HttpResponseCodeWrapper $httpResponseCodeWrapper, private DataPrinterWrapper $dataPrinter)
     {
 
     }
 
-    public function handleException(Throwable $exception): void
+    public function handleException(Throwable $exception): string
     { 
 
         if($exception instanceof PageNotFoundException){
@@ -25,10 +26,12 @@ class ExceptionHandler
         }
 
         if(strtolower(config('app.env') !== 'production')){ 
-            echo var_export(convertToArray($exception), true);
+            $this->dataPrinter->print(convertToArray($exception));
+            return 'Full exception message is shown to the client';
         }else{
             require __DIR__ . "/../views/errors/$production_exception_template";
             logException($exception);
         }
+        return '';
     }
 }
