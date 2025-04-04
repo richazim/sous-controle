@@ -21,7 +21,7 @@ class RequestToControllerHandler
         return $controller->{$params['action']}(...$this->getControllerActionArgs($controller, $params['action'], $params));
     }
 
-    private function getControllerActionArgs($controllerObject, $actionName, array $params): array
+    private function getControllerActionArgs(Controller $controllerObject, string $actionName, array $params): array
     {
         $args = [];
 
