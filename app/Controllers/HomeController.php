@@ -15,7 +15,9 @@ class HomeController extends Controller
 
     public function index(): Response
     {
-        $data = $this->testModel->all();
-        return $this->view("home/index", ['data' => $data]);
+        // $data = $this->testModel->all();
+        // return $this->view("home/index", ['data' => $data]);
+
+        return $this->view("home/index", ['data' => ["Alice", "Bernard", "John"]]);
     }
 }
